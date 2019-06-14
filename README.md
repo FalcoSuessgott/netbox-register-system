@@ -89,3 +89,20 @@ Created IP address "10.X.X.X" for NIC "eth0".
 Successfully registiered "pilot-2.dev.int".
 
 ```
+
+## Additional information
+I packed this script into a rpm and install it on a VM when I need it.
+The dependencies are also packaged as a rpm and added to the spec-file.
+
+In order to build rpms out of pip depencies, just do:
+
+```
+wget PYTHON_MODUL.tar.gz
+tar xzf PYTHON_MODUL.tar.gz
+cd PYTHON_MODUL_DIR
+python setup.py bdist_rpm
+cd dist
+```
+
+If you need an example spec-file, you can message me.
+Have fun :)
