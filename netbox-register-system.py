@@ -111,7 +111,6 @@ def compareSystem():
 	tableData += compareCPU(VM)
 	tableData += compareDisk(VM)
 	tableData += compareMemory(VM)
-	tableData += compareSpacewalkProfile(VM)
 	tableData += compareNetwork(VM)
 
 	sys.stderr.write("\n" + table.table + "\n")
@@ -203,20 +202,6 @@ def compareMemory(VM):
 		tableData = [["Memory", str(systemMemory), str(netboxMemory), "True"]]
 	else:
 		tableData = [["Memory", systemMemory, netboxMemory, "False"]]
-
-	return tableData
-
-
-def compareSpacewalkProfile(VM):
-	""" Compares system SW profile with netbox SW profile"""
-
-	netboxSwId = VM.custom_fields['spacewalk_id'].split('=')[1]
-	systemSwID = getSpacewalkID().strip()
-
-	if netboxSwId == systemSwID:
-		tableData = [["Spacewalk ID", systemSwID.strip(), netboxSwId, "True"]]
-	else:
-		tableData = [["Spacewalk ID", systemSwID.strip(), netboxSwId, "False"]]
 
 	return tableData
 
@@ -328,20 +313,17 @@ def createVM():
 		memory = psutil.virtual_memory()
 		totalDisk = roundUp(disk.total / 2 ** 30, -1)
 		totalMemory = roundUp(memory.total / 2 ** 30, -1) * 1024
-		swID = getSpacewalkID()
-
-		if swID == 0:
-			print "No Spacewalk ID found. Continuing with system registration."
 
 		virtualMachine = dict(
 			name=str(hostname),
 			role=8,
-			cluster=4,
+			cluster=1,
 			platform=5,
 			vcpus=vcpus,
 			memory=int(totalMemory),
 			disk=int(totalDisk),
 		)
+
 		VM = nb.virtualization.virtual_machines.create(virtualMachine)
 		print "Created \"%s\"." % (hostname)
 		return VM
