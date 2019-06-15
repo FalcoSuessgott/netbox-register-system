@@ -1,10 +1,13 @@
 # netbox-register-system
 This is a small python script, that I use for registering virtual machines to netbox. 
-It creates the virtual machine, its interfaces and ip addresses.
+It creates the virtual machine, its interfaces and ip addresses. 
+Furthermore it can be used to display differences, update them to nethox or pull them from netbox.
+I, for example packaged this script into a rpm and run it with `--compare` in a cron-job. 
+If there a differences, then I trigger a notification.
 
 **You may need to adjust some parameters in order to be able to use it**
 
-## Technial notes
+## Technical notes
 1. Tested on CentOS7 and RHEL7
 2. Tested with ```python 2.7```
 
@@ -23,7 +26,7 @@ Following options are implemented:
 - register: Registers the system with at netbox.
 - compare: Compares the system parameter with its registration onnetbox
 - delete: Deletes the system from netbox.
-- update: Updates the system parameter on netbox
+- update: Updates the systems parameter on netbox
 
 ## Examples
 ### register system
@@ -47,7 +50,7 @@ $ sudo netbox -d
 [deleting system]
 Deleted "pilot-2.dev.int" from netbox.
 ```
-### comparing system with its netbox config
+### comparing systems config with its netbox config
 ```
 $ sudo netbox -c
 [comparing system]
