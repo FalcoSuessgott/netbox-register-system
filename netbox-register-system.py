@@ -2,8 +2,7 @@
 #
 # Creates a virtual machine its interfaces and its ip addresses on netbox
 #
-# Autor:     	tom.morelly@biotronik.com
-# Department:   HSS
+# Autor:     	tom-morelly@gmx.de
 # Date:      	16.04.2019
 #
 #
